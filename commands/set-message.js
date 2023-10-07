@@ -10,13 +10,17 @@ module.exports = [
       .addBooleanOption((option) =>
         option
           .setName("come-message")
-          .setDescription("メッセージを送信するか設定できます(default: ture)")
+          .setDescription("メッセージを送信するか設定できます(default: true)")
           .setRequired(true),
       ),
 
     async execute(interaction) {
       await interaction.deferReply({ ephemeral: true });
-      await interaction.reply("nunti");
+      const sendMassage = interaction.options.getBoolean("come-message");
+
+      await interaction.editReply(
+        `メッセージの送信が${sendMassage}に変更されました`,
+      );
     },
   },
 ];
