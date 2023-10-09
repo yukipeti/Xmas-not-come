@@ -16,7 +16,8 @@ module.exports = [
 
     async execute(interaction) {
       await interaction.deferReply({ ephemeral: true });
-      const sendMassage = interaction.options.getBoolean("come-message");
+      let sendMassage = true;
+      sendMassage = interaction.options.getBoolean("come-message");
 
       await interaction.editReply(
         `メッセージの送信が${sendMassage}に変更されました`,
