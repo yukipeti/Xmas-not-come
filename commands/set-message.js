@@ -18,6 +18,7 @@ module.exports = [
 
     async execute(interaction) {
       await interaction.deferReply({ ephemeral: true });
+
       sendMessage = interaction.options.getBoolean("come-message");
 
       console.log(`${sendMessage}`);
@@ -28,6 +29,13 @@ module.exports = [
     },
   },
 ];
+/*
 module.exports = function getCome() {
   return sendMessage;
-};
+};*/
+///　index.jsを起動したときに吐く　ないとでない
+// 100%技術不足なので寝てからどうにかしよう
+// ↑　 for (const command of commands) {
+//                         ^
+//
+// TypeError: commands is not iterable

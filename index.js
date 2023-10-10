@@ -15,9 +15,10 @@ const commandFiles = fs
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
   const commands = require(filePath);
-  console.log(commands);
+  //デバック
+  //console.log(commands);
+
   for (const command of commands) {
-    // 取得した.jsファイル内の情報から、コマンドと名前をListenner-botに対して設定
     if (command.data && command.execute) {
       client.commands.set(command.data.name, command);
     } else {
@@ -34,6 +35,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   const command = interaction.client.commands.get(interaction.commandName);
+  console.log(command);
 
   // 一致するコマンドがなかった場合
   if (!command) {
