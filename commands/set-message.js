@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 
+let sendMessage = true;
+
 module.exports = [
   {
     data: new SlashCommandBuilder()
@@ -16,12 +18,16 @@ module.exports = [
 
     async execute(interaction) {
       await interaction.deferReply({ ephemeral: true });
-      let sendMassage = true;
-      sendMassage = interaction.options.getBoolean("come-message");
+      sendMessage = interaction.options.getBoolean("come-message");
+
+      console.log(`${sendMessage}`);
 
       await interaction.editReply(
-        `メッセージの送信が${sendMassage}に変更されました`,
+        `メッセージの送信が${sendMessage}に変更されました`,
       );
     },
   },
 ];
+module.exports = function getCome() {
+  return sendMessage;
+};
