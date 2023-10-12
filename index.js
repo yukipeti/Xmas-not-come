@@ -19,6 +19,7 @@ for (const file of commandFiles) {
   //console.log(commands);
 
   for (const command of commands) {
+    //console.log(command);
     if (command.data && command.execute) {
       client.commands.set(command.data.name, command);
     } else {
