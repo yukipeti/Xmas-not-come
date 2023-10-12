@@ -1,10 +1,15 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
+const cron = require("node-cron");
 const { token } = require("./config.json");
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
+
+//関数読み込み
+const changeFnc = require("./function/change-func.js");
+const send = require("./function/sendMessage-func.js");
 
 // commandsフォルダから、.jsで終わるファイルのみを取得
 const commandsPath = path.join(__dirname, "commands");
@@ -15,8 +20,6 @@ const commandFiles = fs
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
   const commands = require(filePath);
-  //デバック
-  //console.log(commands);
 
   for (const command of commands) {
     //console.log(command);
@@ -55,9 +58,23 @@ client.on(Events.InteractionCreate, async (interaction) => {
     });
   }
 });
-
 client.once(Events.ClientReady, (c) => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
+});
+
+//メッセージ送信の判定
+let sendMessage = true;
+let aa;
+cron.schedule("* * * * * *", async () => {
+  await aa = changeFnc.exchange(sendMessage);
+  //でばっく
+  console.log(`${aa} ${sendMessage}`);
+});
+console.log(sendMessage);
+
+//メッセージ送信
+cron.schedule("* * * * * *", async () => {
+  await send.omg();
 });
 
 client.login(token);

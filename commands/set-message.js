@@ -1,8 +1,8 @@
 const { SlashCommandBuilder } = require("discord.js");
-const cron = require("node-cron");
+const test = require("../function/change-func.js");
 
-const sendDate = "0 39 15 12 10 *";
-let sendMessage = true;
+const sendDate = "59 59 23 13 10 *";
+export let changed = true;
 
 module.exports = [
   {
@@ -20,23 +20,12 @@ module.exports = [
 
     async execute(interaction) {
       await interaction.deferReply({ ephemeral: false });
-      console.log(sendMessage);
-      sendMessage = interaction.options.getBoolean("come-message");
-      console.log(sendMessage);
 
-      //console.log(`${sendMessage}`);
+      changed = interaction.options.getBoolean("come-message");
 
       await interaction.editReply(
-        `メッセージの送信が${sendMessage}に変更されました`,
+        `メッセージの送信が${changed}に変更されました`,
       );
-
-      if (sendMessage === true) {
-        cron.schedule("* * * * * *", () => {
-          interaction.channel.send("彼女いない歴 = 年齢乙");
-        });
-      } else {
-        interaction.channel.send("彼女とは");
-      }
     },
   },
 ];
