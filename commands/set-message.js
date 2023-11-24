@@ -1,8 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
-const test = require("../function/change-func.js");
-
-const sendDate = "59 59 23 13 10 *";
-export let changed = true;
+const sendMessage = require("../function/sendMessage-func.js");
+const data = require("../data.json");
 
 module.exports = [
   {
@@ -14,17 +12,21 @@ module.exports = [
       .addBooleanOption((option) =>
         option
           .setName("come-message")
-          .setDescription("メッセージを送信するか設定できます(default: true)")
+          .setDescription("メッセージを送信するか設定できます")
           .setRequired(true),
       ),
 
     async execute(interaction) {
-      await interaction.deferReply({ ephemeral: false });
+      await interaction.deferReply({ ephemeral: true });
 
-      changed = interaction.options.getBoolean("come-message");
+      const wtf = interaction.options.getBoolean("come-message");
+
+      data.comeSet = wtf;
+
+      await sendMessage.omg(interaction);
 
       await interaction.editReply(
-        `メッセージの送信が${changed}に変更されました`,
+        `メッセージの送信が${data.comeSet}に変更されました`,
       );
     },
   },
