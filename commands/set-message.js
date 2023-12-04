@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
-const sendMessage = require("../function/sendMessage-func.js");
 const data = require("../data.json");
+const cron = require("node-cron");
+const { setTimeout: wait } = require("node:timers/promises");
 
 module.exports = [
   {
@@ -19,12 +20,7 @@ module.exports = [
     async execute(interaction) {
       await interaction.deferReply({ ephemeral: true });
 
-      const wtf = interaction.options.getBoolean("come-message");
-
-      data.comeSet = wtf;
-
-      await sendMessage.omg(interaction);
-
+      data.comeSet = interaction.options.getBoolean("come-message");
       await interaction.editReply(
         `メッセージの送信が${data.comeSet}に変更されました`,
       );
