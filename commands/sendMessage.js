@@ -3,6 +3,8 @@ const data = require("../data.json");
 const { setTimeout: wait } = require("node:timers/promises");
 const cron = require("node-cron");
 
+const Xmas = "0 0 0 24 12 *";
+
 module.exports = [
   {
     data: new SlashCommandBuilder()
@@ -27,7 +29,7 @@ module.exports = [
       );
 
       if (data.comeSet === true) {
-        cron.schedule("* * * * * *", async () => {
+        cron.schedule(Xmas, async () => {
           if (data.come === true) {
             await interaction.channel.send(
               "('ε' )くー\n" +
@@ -68,177 +70,8 @@ module.exports = [
           }
         });
       } else if (data.comeSet === false) {
-        console.log("停止中だじょー");
+        console.log("kitanai desu jyo");
       }
     },
   },
 ];
-
-/*
-          interaction.channel.send("('ε' )くー");
-          interaction.channel.send("('ㅂ' ) り");
-          interaction.channel.send("('ε' )す");
-          interaction.channel.send("('□' )ま");
-          interaction.channel.send("('ε' )す");
-          interaction.channel.send("('□' )が");
-          interaction.channel.send("('ﾛ' )こ");
-          interaction.channel.send("('ﾛ' )と");
-          interaction.channel.send("('ㅂ' )し");
-          interaction.channel.send("('ﾛ' )も");
-          interaction.channel.send("('□' )やーっ");
-          interaction.channel.send("('ㅂ' )て");
-          interaction.channel.send("('ﾛ' )こ");
-          interaction.channel.send("('□' )な");
-          interaction.channel.send("('ㅂ' )い");
-
-           */
-
-/*
-実験は失敗。
-けれど失敗は必ずしもくじける要因ではない
-しかし
-くじけた
-例外ってやつ
-await interaction.reply("('ε' )くー");
-          await interaction.editReply("('ε' )くー\n" + "('ㅂ' ) り");
-          await interaction.editReply(
-            "('ε' )くー\n" + "('ㅂ' ) り\n" + "('ε' )す",
-          );
-          await interaction.editReply(
-            "('ε' )くー\n" + "('ㅂ' ) り\n" + "('ε' )す\n" + "('□' )ま",
-          );
-          await interaction.editReply(
-            "('ε' )くー\n" +
-              "('ㅂ' ) り\n" +
-              "('ε' )す\n" +
-              "('□' )ま\n" +
-              "('ε' )す",
-          );
-          await interaction.editReply(
-            "('ε' )くー\n" +
-              "('ㅂ' ) り\n" +
-              "('ε' )す\n" +
-              "('□' )ま\n" +
-              "('ε' )す\n" +
-              "('□' )が",
-          );
-          await interaction.editReply(
-            "('ε' )くー\n" +
-              "('ㅂ' ) り\n" +
-              "('ε' )す\n" +
-              "('□' )ま\n" +
-              "('ε' )す\n" +
-              "('□' )が\n" +
-              "('ﾛ' )こ",
-          );
-          await interaction.editReply(
-            "('ε' )くー\n" +
-              "('ㅂ' ) り\n" +
-              "('ε' )す\n" +
-              "('□' )ま\n" +
-              "('ε' )す\n" +
-              "('□' )が\n" +
-              "('ﾛ' )こ\n" +
-              "('ﾛ' )と",
-          );
-          await interaction.editReply(
-            "('ε' )くー\n" +
-              "('ㅂ' ) り\n" +
-              "('ε' )す\n" +
-              "('□' )ま\n" +
-              "('ε' )す\n" +
-              "('□' )が\n" +
-              "('ﾛ' )こ\n" +
-              "('ﾛ' )と\n" +
-              "('ㅂ' )し",
-          );
-          await interaction.editReply(
-            "('ε' )くー\n" +
-              "('ㅂ' ) り\n" +
-              "('ε' )す\n" +
-              "('□' )ま\n" +
-              "('ε' )す\n" +
-              "('□' )が\n" +
-              "('ﾛ' )こ\n" +
-              "('ﾛ' )と\n" +
-              "('ㅂ' )し\n" +
-              "('ﾛ' )も",
-          );
-          await interaction.editReply(
-            "('ε' )くー\n" +
-              "('ㅂ' ) り\n" +
-              "('ε' )す\n" +
-              "('□' )ま\n" +
-              "('ε' )す\n" +
-              "('□' )が\n" +
-              "('ﾛ' )こ\n" +
-              "('ﾛ' )と\n" +
-              "('ㅂ' )し\n" +
-              "('ﾛ' )も\n" +
-              "('□' )やーっ",
-          );
-          await interaction.editReply(
-            "('ㅂ' )て('ε' )くー\n" +
-              "('ㅂ' ) り\n" +
-              "('ε' )す\n" +
-              "('□' )ま\n" +
-              "('ε' )す\n" +
-              "('□' )が\n" +
-              "('ﾛ' )こ\n" +
-              "('ﾛ' )と\n" +
-              "('ㅂ' )し\n" +
-              "('ﾛ' )も\n" +
-              "('□' )やーっ\n" +
-              "('ㅂ' )て",
-          );
-          await interaction.editReply(
-            "('ε' )くー\n" +
-              "('ㅂ' ) り\n" +
-              "('ε' )す\n" +
-              "('□' )ま\n" +
-              "('ε' )す\n" +
-              "('□' )が\n" +
-              "('ﾛ' )こ\n" +
-              "('ﾛ' )と\n" +
-              "('ㅂ' )し\n" +
-              "('ﾛ' )も\n" +
-              "('□' )やーっ\n" +
-              "('ㅂ' )て\n" +
-              "('ﾛ' )こ",
-          );
-          await interaction.editReply(
-            "('ε' )くー\n" +
-              "('ㅂ' ) り\n" +
-              "('ε' )す\n" +
-              "('□' )ま\n" +
-              "('ε' )す\n" +
-              "('□' )が\n" +
-              "('ﾛ' )こ\n" +
-              "('ﾛ' )と\n" +
-              "('ㅂ' )し\n" +
-              "('ﾛ' )も\n" +
-              "('□' )やーっ\n" +
-              "('ㅂ' )て\n" +
-              "('ﾛ' )こ\n" +
-              "('□' )な",
-          );
-          await interaction.editReply(
-            "('ε' )くー\n" +
-              "('ㅂ' ) り\n" +
-              "('ε' )す\n" +
-              "('□' )ま\n" +
-              "('ε' )す\n" +
-              "('□' )が\n" +
-              "('ﾛ' )こ\n" +
-              "('ﾛ' )と\n" +
-              "('ㅂ' )し\n" +
-              "('ﾛ' )も\n" +
-              "('□' )やーっ\n" +
-              "('ㅂ' )て\n" +
-              "('ﾛ' )こ\n" +
-              "('□' )な\n" +
-              "('ㅂ' )い",
-          );
-          //await wait(1000);
-          await interaction.channel.send("# ('-' )");
- */

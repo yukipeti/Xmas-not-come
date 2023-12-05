@@ -1,7 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
 const data = require("../data.json");
-const cron = require("node-cron");
-const { setTimeout: wait } = require("node:timers/promises");
 
 module.exports = [
   {

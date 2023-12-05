@@ -1,7 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
-const cron = require("node-cron");
 const { token } = require("./config.json");
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -57,11 +56,5 @@ client.on(Events.InteractionCreate, async (interaction) => {
 client.once(Events.ClientReady, (c) => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
 });
-
-/*
-cron.schedule("* * * * * *", async () => {
-  exports.comeSet = await require("./data.json");
-});
- */
 
 client.login(token);
